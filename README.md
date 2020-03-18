@@ -2,7 +2,7 @@
 
 Source code of the SOS web server at: https://sites.google.com/view/statbiophysens/sos 
 
-Command to run locally on the terminal: python olga_widget.py 
+Command to run locally on the terminal: python sos.py 
 
 == Description ==
 
