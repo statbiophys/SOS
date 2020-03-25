@@ -26,15 +26,15 @@ from utils import *
 from minimal_sonia import MinimalSonia
 import urllib.parse as urllib
 from textwrap import dedent
-data_tables=[pd.read_csv('data_'+i+'.csv') for i in options_of]
+data_tables=[pd.read_csv(local_directory+'data_'+i+'.csv') for i in options_of]
 app = dash.Dash(__name__,meta_tags=[{"name": "viewport", "content": "width=device-width, initial-scale=1"}])
 import plotly.graph_objs as go
 import pathlib
 import time
 import base64
 
-test_base64 = base64.b64encode(open('plots.png', 'rb').read()).decode('ascii')
-pobs = base64.b64encode(open('pobs.png', 'rb').read()).decode('ascii')
+test_base64 = base64.b64encode(open(local_directory+'plots.png', 'rb').read()).decode('ascii')
+pobs = base64.b64encode(open(local_directory+'pobs.png', 'rb').read()).decode('ascii')
 
 BASE_PATH = pathlib.Path(__file__).parent.resolve()
 
@@ -561,8 +561,8 @@ def generate_seqs(n_clicks,n,index_,ppost,seed):
     n=int(n)
     time.sleep(1)
     seqs=sample_olga(n,index_,ppost,seed)
-    if bool(ppost): df=pd.DataFrame(seqs,columns=['amino_acid','v_gene','j_gene'])
-    else: df=pd.DataFrame(seqs,columns=['nucleotide','amino_acid','v_gene','j_gene'])
+#    if bool(ppost): df=pd.DataFrame(seqs,columns=['amino_acid','v_gene','j_gene'])
+    df=pd.DataFrame(seqs,columns=['nucleotide','amino_acid','v_gene','j_gene'])
     csv_string = df.to_csv(index=False, encoding='utf-8')
     csv_string = "data:text/csv;charset=utf-8," + urllib.quote(csv_string)
     return csv_string
