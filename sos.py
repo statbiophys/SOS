@@ -263,7 +263,12 @@ html.Div(
                 'padding-top':'5%', 'padding-bottom':'5%',}),
 
 ])
-
+default_seqs=[['CASSDAQGRNRGTEAFF','TGTGCCAGCAGTGACGCACAGGGGCGTAATCGTGGGACTGAAGCTTTCTTT','TRBV9','TRBJ1-1'],
+            ['CAYRLIQGAQKLVF','TGTGCTTATAGATTAATTCAGGGAGCCCAGAAGCTGGTATTT','TRAV38-2/DV8','TRAJ54'],
+            ['CARHYGSGSEWFDPW','TGTGCGAGACACTATGGTTCGGGGAGTGAATGGTTCGACCCCTGG','IGHV4-34','IGHJ5'],
+            ['CMQALQTPQITF','TGCATGCAAGCTCTACAAACTCCTCAGATCACCTTC','IGKV2-28','IGKJ5'],
+            ['CQSADSSGQVF','TGTCAATCAGCAGACAGCAGTGGACAGGTCTTC','IGLV3-25','IGLJ1'],
+            ['CTCSLTSNERLFF','TGCACCTGCAGTTTGACATCCAACGAAAGATTATTTTTC','TRBV1','TRBJ1-4']]
 ###############################
 # HERE I DEFINE THE FUNCTIONS #
 ###############################
@@ -279,10 +284,10 @@ app.clientside_callback(
 
 @app.callback(
     Output('cdr3', 'value'),
-    [Input('cdr3-type', 'value')])
-def update_bar(value):
-    if value>0: return 'CASSDAQGRNRGTEAFF'
-    else: return 'TGTGCCAGCAGTGACGCACAGGGGCGTAATCGTGGGACTGAAGCTTTCTTT'
+    [Input('cdr3-type', 'value'),Input('name-dropdown', 'value')])
+def update_bar(value,index):
+    if value>0: return default_seqs[index][0]
+    else: return default_seqs[index][1]
 
 @app.callback(
     Output('mobile', 'style'),
@@ -528,17 +533,13 @@ def update_date_dropdown(name):
     genV,genJ=return_genes(int(name))
     return [{'label': i, 'value': i} for i in genV]
 
-@app.callback(Output('v_option', 'value'),[Input('name-dropdown', 'value')])
-def update_value_v_dropdown(name):
-    genV,genJ=return_genes(int(name))
-    if name<1:return 'TRBV9'
-    return genV[0]
+@app.callback(Output('v_option', 'value'),[Input('name-dropdown', 'value'),Input('v_option', 'options')])
+def update_value_v_dropdown(name,option):
+    return default_seqs[name][2]
 
-@app.callback(Output('j_option', 'value'),[Input('name-dropdown', 'value')])
-def update_value_j_dropdown(name):
-    genV,genJ=return_genes(int(name))
-    if name < 1 :return 'TRBJ1-1'
-    return genJ[0]
+@app.callback(Output('j_option', 'value'),[Input('name-dropdown', 'value'),Input('j_option', 'options')])
+def update_value_j_dropdown(name,option):
+    return default_seqs[name][3]
 
 @app.callback(Output('j_option', 'options'),[Input('name-dropdown', 'value')])
 def update_date_dropdown_again(name):
@@ -561,7 +562,6 @@ def generate_seqs(n_clicks,n,index_,ppost,seed):
     n=int(n)
     time.sleep(1)
     seqs=sample_olga(n,index_,ppost,seed)
-#    if bool(ppost): df=pd.DataFrame(seqs,columns=['amino_acid','v_gene','j_gene'])
     df=pd.DataFrame(seqs,columns=['nucleotide','amino_acid','v_gene','j_gene'])
     csv_string = df.to_csv(index=False, encoding='utf-8')
     csv_string = "data:text/csv;charset=utf-8," + urllib.quote(csv_string)

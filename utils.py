@@ -17,9 +17,9 @@ import olga.sequence_generation as seq_gen
 from minimal_sonia import MinimalSonia
 import os
 import numpy as np
-local_directory='/Users/giulioisac/Desktop/cluster/random/olga_app/'
+local_directory='/Users/giulioisac/Documents/GitHub/sos/'
 options_of=['human_T_beta','human_T_alpha','human_B_heavy','human_B_kappa','human_B_lambda','mouse_T_beta']
-norms=[[0.24566713516135608 ,0.955488875],[0.2877415063096418, 0.99802775],
+norms=[[0.24566713516135608 ,1.00032325],[0.2877415063096418, 0.99802775],
         [0.1510785166961445, 0.9770069166666666],[0.29247125650320943, 1.0170964375],
         [0.2948949972739931, 0.998998],[0.27744730165886944, 0.8646105625]]
 names=['Human T Beta','Human T Alpha','Human B Heavy','Human B Kappa','Human B Lambda','Mouse T Beta']
@@ -49,9 +49,9 @@ def return_genes(index):
     gene_v=list(gene_v)
     gene_j=list(gene_j)
     #select out bad genes
-    if options_of[index]=='human_T_alpha': return gene_v,gene_j 
+    if options_of[index]=='human_T_beta': return gene_v,gene_j 
     elif options_of[index]=='human_T_alpha':
-        bad_vs=['TRAV8-4','TRAV3','TRAV33','TRAV15','TRAV32']
+        bad_vs=['TRAV8-4','TRAV3','TRAV26-2']
         bad_js=['TRAJ9','TRAJ58']
         for v in bad_vs: gene_v.remove(v)
         for j in bad_js: gene_j.remove(j)
