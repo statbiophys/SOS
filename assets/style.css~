@@ -1,0 +1,113 @@
+.tabs {
+    height: 10%; /*44px;*/
+}
+
+#main {
+    padding-top: 2%;
+    padding-left: 4%;
+    padding-right: 4%;
+}
+
+
+.full-div{
+    width: 80%;
+    padding-left: 10%;
+    max-height: 90vh;
+    overflow: auto;
+    display: inline-block;
+    vertical-align: top;
+    float: left;
+    padding-top: 3vh;
+}
+.interaction-div {
+    width: 45%;
+    max-height: 90vh;
+    overflow: auto;
+    display: inline-block;
+    vertical-align: top;
+    float: left;
+    padding-top: 3vh;
+}
+
+.results-div{
+    width: 53%;
+    height: 90vh;
+    float: right;
+    display: inline-block;
+    vertical-align: top;
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+.dropdown-menu {
+    display: inline-block;
+    /* /\*justify-content: center;*\/ */
+    vertical-align: middle;
+    width: 100%;
+}
+
+.input {
+    backgroundColor: #ffffff;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.graph {
+    height: 30vh;
+    width: 100%;
+}
+
+#descr-graph {
+    width: 90%;
+    height: 100%;
+    padding-left:20%;
+    padding-top:20%;
+}
+
+.hidden {
+    display: none;
+}
+
+
+P {
+    width: 100%;
+    display:inline-block;
+    vertical-align:middle;
+    padding-left:1;
+}
+
+h4 {
+    text-align: center;
+    color: navy;
+}
+
+body {
+    font-family: sans-serif;
+}
+
+.plot-div {
+    width: 48%;
+    height: 50%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+#control-tabs{
+    width: 80%;
+    padding-left:10%;
+    padding-right:0%;
+    height: 80%;
+    padding-bottom:10%;
+    padding-top:10%;
+}
+
+.centered {
+    padding-top: 0.6cm;
+    padding-bottom: 0.2cm;
+    text-align: center
+}
+
+.table-container {
+    width: 100%;
+}
+

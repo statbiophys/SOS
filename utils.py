@@ -11,13 +11,15 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.'''
 
-import olga.load_model as olga_load_model
-import olga.generation_probability as pgen
-import olga.sequence_generation as seq_gen
+import olga3.load_model as olga_load_model
+import olga3.generation_probability as pgen
+import olga3.sequence_generation as seq_gen
 from minimal_sonia import MinimalSonia
 import os
 import numpy as np
-local_directory='/Users/giulioisac/Documents/GitHub/sos/'
+import os 
+
+local_directory=os.path.dirname(os.path.realpath(__file__)) + "/"
 options_of=['human_T_beta','human_T_alpha','human_B_heavy','human_B_kappa','human_B_lambda','mouse_T_beta']
 norms=[[0.24566713516135608 ,1.00032325],[0.2877415063096418, 0.99802775],
         [0.1510785166961445, 0.9770069166666666],[0.29247125650320943, 1.0170964375],
@@ -188,3 +190,18 @@ def nt2aa(ntseq):
     aa_dict ='KQE*TPASRRG*ILVLNHDYTPASSRGCILVFKQE*TPASRRGWMLVLNHDYTPASSRGCILVF'
     
     return ''.join([aa_dict[nt2num[ntseq[i]] + 4*nt2num[ntseq[i+1]] + 16*nt2num[ntseq[i+2]]] for i in range(0, len(ntseq), 3) if i+2 < len(ntseq)])
+
+def float_to_tex(val):
+    """ Transform a float in an str, so that's it's written in a tex friendly way """
+    if val == 0:
+        return '0'
+    exp = int(np.floor(np.log10(abs(val))))
+    return '{0:.1f} \\times 10^{{{1:+3}}}'.format(val/10**exp, exp)
+
+def float_to_html(val):
+    """ Transform a float in an str, in an html-friendly way """
+    if val == 0:
+        return '0'
+    exp = int(np.floor(np.log10(abs(val))))
+    return '{0:.1f} × 10<sup>{1:+3}</sup>'.format(val/10**exp, exp)
+
